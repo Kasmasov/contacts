@@ -1,14 +1,14 @@
 import React from 'react';
-import './App.css';
+
+import { Route, Routes } from 'react-router-dom'
+import { ContactForm } from './component/ContactForm'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-         приложенени
-        </p>
-      </header>
+    <div >
+       <Routes>
+         <Route path="/" element={<ContactForm /> }/>
+       </Routes>
     </div>
   );
 }

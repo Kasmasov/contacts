@@ -1,0 +1,40 @@
+.main-container-contact-card {
+    display: flex;
+}
+
+.container-contact-list{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100vh;
+}
+
+.container-contact-card{
+    border-left: 2px solid rgb(236,236,236);
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    height: 100vh;
+    padding: 1rem;
+    padding: 1rem 0 0 1rem;
+}
+
+.top-contact-card{
+    flex: 1;
+}
+
+.main-contact-card{
+    flex: 10;
+}
+
+.bottom-contact-card{
+    display: flex;
+    justify-content:space-between;
+    flex:1;
+    padding: 0 2rem 0 2rem;
+
+}
+
+.p-8{
+    padding: 0 0 0 8rem;
+}
