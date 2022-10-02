@@ -12,6 +12,11 @@ export const ContactCard: FC = () => {
   const [company, setCompany] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [email, setEmail] = useState<string>('')
+  const [street, setStreet] = useState<string>('')
+  const [city, setCity] = useState<string>('')
+  const [country, setCountry] = useState<string>('')
+  const [zipcode, setZipCode] = useState<string>('')
+  const [note, setNote] = useState<string>('')
 
 
   const handleChangeFirstName = useCallback((value:string): void => {
@@ -29,6 +34,21 @@ export const ContactCard: FC = () => {
   const handleChangeEmail = useCallback((value:string): void => {
     setEmail(value)
   },[setEmail])
+  const handleChangeStreet = useCallback((value:string): void => {
+    setStreet(value)
+  },[setStreet])
+  const handleChangeCity = useCallback((value:string): void => {
+    setCity(value)
+  },[setCity])
+  const handleChangeCountry = useCallback((value:string): void => {
+    setCountry(value)
+  },[setCountry])
+  const handleChangeZipcode = useCallback((value: string): void => {
+    setZipCode(value)
+  }, [setZipCode])
+  const handleChangeNote = useCallback ((value:string): void => {
+    setNote(value)
+  },[setNote])
 
 
   return (
@@ -138,6 +158,8 @@ export const ContactCard: FC = () => {
                style={{
                 marginLeft:'1rem'
                }}
+               value={street}
+               onChange={(({target}) => handleChangeStreet(target.value))}
               />
               <Input
                type='text'
@@ -146,6 +168,8 @@ export const ContactCard: FC = () => {
                style={{
                 marginLeft:'1rem'
                }}
+               value={city}
+               onChange={(({target}) => handleChangeCity(target.value))}
                />
                <Input
                 type='text'
@@ -154,6 +178,8 @@ export const ContactCard: FC = () => {
                 style={{
                   marginLeft:'1rem'
                 }}
+                value={country}
+                onChange={(({target}) => handleChangeCountry(target.value))}
                />
                <Input
                 type='text'
@@ -162,6 +188,8 @@ export const ContactCard: FC = () => {
                 style={{
                   marginLeft:'1rem'
                 }}
+                value={zipcode}
+                onChange={(({target}) => handleChangeZipcode(target.value))}
                />
             </div>
           </div>
@@ -185,6 +213,8 @@ export const ContactCard: FC = () => {
                style={{
                 marginLeft:'1.2rem'
                }}
+               value={note}
+               onChange={(({target}) => handleChangeNote(target.value))}
               />
             </div>
        </div>

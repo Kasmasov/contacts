@@ -20,9 +20,6 @@ export type TCard = {
 
 export type TContacts = TCard[];
 
-export type TItemList = {
-    firstName?: string;
-    lastName?: string;
-};
+export type TItemList = keyof TCard;
 
 export type TList = TItemList[];
