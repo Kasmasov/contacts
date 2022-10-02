@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useState } from 'react';
 import { Button, Input } from 'antd'
 import './ContactForm.css'
+import { RecordWithTtl } from 'dns';
 
 export const ContactCard: FC = () => {
 
@@ -46,9 +47,15 @@ export const ContactCard: FC = () => {
   const handleChangeZipcode = useCallback((value: string): void => {
     setZipCode(value)
   }, [setZipCode])
-  const handleChangeNote = useCallback ((value:string): void => {
+  const handleChangeNote = useCallback((value:string): void => {
     setNote(value)
   },[setNote])
+  const isBordered = useCallback((target: EventTarget): void => {
+    console.log(target)
+  },[])
+  const notBordered = useCallback((): void => {
+    setBordered(false)
+  },[])
 
 
   return (
@@ -64,6 +71,8 @@ export const ContactCard: FC = () => {
             fontWeight:'normal'
           }}
           onChange={(({target}) => {handleChangeFirstName(target.value)})}
+          onClick={(({target}) => isBordered(target))}
+          onBlur={notBordered}
           
           />
           <Input
@@ -145,7 +154,7 @@ export const ContactCard: FC = () => {
             <h4
              className='grey m0 lh2'
              style={{
-              marginLeft:'1.2rem'
+              marginLeft:'1.1rem'
              }}
             >
               адрес
@@ -211,7 +220,7 @@ export const ContactCard: FC = () => {
                bordered={bordered}
                rows={4}
                style={{
-                marginLeft:'1.2rem'
+                marginLeft:'.5rem'
                }}
                value={note}
                onChange={(({target}) => handleChangeNote(target.value))}
