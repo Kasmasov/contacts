@@ -7,7 +7,7 @@ export const ContactCard: FC = () => {
 
   const {TextArea} = Input;
 
-  const [bordered, setBordered] = useState<boolean>(false);
+  const [bordered, setBordered] = useState<boolean>(true);
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [company, setCompany] = useState<string>('');
@@ -67,8 +67,9 @@ export const ContactCard: FC = () => {
           placeholder ='Имя'
           bordered={bordered}
           style={{
-            fontSize:'18px',
-            fontWeight:'normal'
+            fontSize: '18px',
+            fontWeight: 'normal',
+            width: firstName.length > 5 ? `${firstName.length * 12}px` : '70px'
           }}
           onChange={(({target}) => {handleChangeFirstName(target.value)})}
           onClick={(({target}) => isBordered(target))}
