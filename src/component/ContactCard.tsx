@@ -1,61 +1,123 @@
 import React, { FC, useCallback, useState } from 'react';
 import { Button, Input } from 'antd'
 import './ContactForm.css'
-import { RecordWithTtl } from 'dns';
 
 export const ContactCard: FC = () => {
 
   const {TextArea} = Input;
 
-  const [bordered, setBordered] = useState<boolean>(true);
   const [firstName, setFirstName] = useState<string>('');
+  const [borderFirstName, setBorderedFirstName] = useState<boolean>(false);
   const [lastName, setLastName] = useState<string>('');
+  const [borderLastName, setBorderLasName] = useState<boolean>(false);
   const [company, setCompany] = useState<string>('');
+  const [borderCompany, setBorderCompany] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>('');
-  const [email, setEmail] = useState<string>('')
-  const [street, setStreet] = useState<string>('')
-  const [city, setCity] = useState<string>('')
-  const [country, setCountry] = useState<string>('')
-  const [zipcode, setZipCode] = useState<string>('')
-  const [note, setNote] = useState<string>('')
+  const [borderPhone, setBorderPhone] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [borderEmail, setBorderEmail] = useState<boolean>(false);
+  const [street, setStreet] = useState<string>('');
+  const [borderStreet, setBorderStreet] = useState<boolean>(false);
+  const [city, setCity] = useState<string>('');
+  const [borderCity, setBorderCity] = useState<boolean>(false);
+  const [country, setCountry] = useState<string>('');
+  const [borderCountry, setBorderCountry] = useState<boolean>(false)
+  const [zipcode, setZipCode] = useState<string>('');
+  const [borderZipcode, setBorderZipcode] = useState<boolean>(false)
+  const [note, setNote] = useState<string>('');
+  const [borderNote, setBorderNote] = useState<boolean>(false)
 
 
   const handleChangeFirstName = useCallback((value:string): void => {
-    setFirstName(value)
+    setFirstName(value);
   },[setFirstName]);
   const handleChangeLastName = useCallback((value:string):void => {
     setLastName(value)
   },[setLastName]);
   const handleChangeCompany = useCallback((value:string): void => {
-    setCompany(value)
+    setCompany(value);
   },[setCompany])
   const handleChangePhone = useCallback((value:string): void => {
-    setPhone(value)
+    setPhone(value);
   },[setPhone])
   const handleChangeEmail = useCallback((value:string): void => {
-    setEmail(value)
+    setEmail(value);
   },[setEmail])
   const handleChangeStreet = useCallback((value:string): void => {
-    setStreet(value)
+    setStreet(value);
   },[setStreet])
   const handleChangeCity = useCallback((value:string): void => {
-    setCity(value)
+    setCity(value);
   },[setCity])
   const handleChangeCountry = useCallback((value:string): void => {
-    setCountry(value)
+    setCountry(value);
   },[setCountry])
   const handleChangeZipcode = useCallback((value: string): void => {
-    setZipCode(value)
+    setZipCode(value);
   }, [setZipCode])
   const handleChangeNote = useCallback((value:string): void => {
-    setNote(value)
+    setNote(value);
   },[setNote])
-  const isBordered = useCallback((target: EventTarget): void => {
-    console.log(target)
-  },[])
-  const notBordered = useCallback((): void => {
-    setBordered(false)
-  },[])
+  const addBorderFirstName = useCallback((): void => {
+    setBorderedFirstName(true);
+  },[setBorderedFirstName])
+  const deleteBorderFirstName = useCallback((): void => {
+    setBorderedFirstName(false);
+  },[setBorderedFirstName])
+  const addBorderLastName = useCallback(():void => {
+    setBorderLasName(true);
+  },[setBorderLasName])
+  const deleteBorderLastName = useCallback(():void => {
+    setBorderLasName(false);
+  }, [])
+  const addBorderCompany = useCallback((): void => {
+    setBorderCompany(true);
+  },[setBorderCompany])
+  const deleteBorderCompany = useCallback((): void => {
+    setBorderCompany(false);
+  },[setBorderCompany])
+  const addBorderPhone = useCallback((): void => {
+    setBorderPhone(true);
+  },[setBorderPhone])
+  const deleteBorderPhone = useCallback(():void => {
+    setBorderPhone(false);
+  },[setBorderPhone])
+  const addBorderEmail = useCallback((): void => {
+    setBorderEmail(true);
+  },[setBorderEmail])
+  const deleteBorderEmail = useCallback((): void => {
+    setBorderEmail(false);
+  },[setBorderEmail])
+  const addBorderStreet = useCallback((): void => {
+    setBorderStreet(true);
+  },[setBorderStreet])
+  const deleteBorderStreet = useCallback((): void => {
+    setBorderStreet(false);
+  },[setBorderStreet])
+  const addBorderCity = useCallback((): void => {
+    setBorderCity(true);
+  },[setBorderCity])
+  const deleteBorderCity = useCallback((): void => {
+    setBorderCity(false);
+  },[setBorderCity])
+  const addBorderCountry = useCallback((): void => {
+    setBorderCountry(true);
+  },[setBorderCountry])
+  const deleteBorderCountry = useCallback((): void => {
+    setBorderCountry(false);
+  },[setBorderCountry])
+  const addBorderZipcode = useCallback((): void => {
+    setBorderZipcode(true);
+  },[setBorderZipcode])
+  const deleteBorderZipcode = useCallback((): void => {
+    setBorderZipcode(false);
+  },[setBorderZipcode])
+  const addBorderNote = useCallback((): void => {
+    setBorderNote(true);
+  },[setBorderNote])
+  const deleteBorderNote = useCallback((): void => {
+    setBorderNote(false);
+  },[setBorderNote])
 
 
   return (
@@ -65,37 +127,40 @@ export const ContactCard: FC = () => {
           type='text'
           value={firstName}
           placeholder ='Имя'
-          bordered={bordered}
+          bordered={borderFirstName}
           style={{
             fontSize: '18px',
             fontWeight: 'normal',
             width: firstName.length > 5 ? `${firstName.length * 12}px` : '70px'
           }}
           onChange={(({target}) => {handleChangeFirstName(target.value)})}
-          onClick={(({target}) => isBordered(target))}
-          onBlur={notBordered}
-          
+          onClick={addBorderFirstName}
+          onBlur={deleteBorderFirstName}
           />
           <Input
             type='text'
             value={lastName}
-            bordered={bordered}
+            bordered={borderLastName}
             placeholder='Фамилия'
             style={{
               fontSize:'18px',
               fontWeight:'normal'
             }}
            onChange={(({target}) => {handleChangeLastName (target.value)})}
+           onClick={addBorderLastName}
+           onBlur={deleteBorderLastName}
           /> 
           <Input
             type='text'
             value={company}
-            bordered={bordered}
+            bordered={borderCompany}
             placeholder='Компания'
             style={{
               fontSize:'12px'
             }}
             onChange={(({target}) => {handleChangeCompany(target.value)})}
+            onClick={addBorderCompany}
+            onBlur={deleteBorderCompany}
           />
         </div>
         <div className='main-contact-card'>
@@ -113,12 +178,14 @@ export const ContactCard: FC = () => {
           <Input
              type='text'
              value={phone}
-             bordered={bordered}
+             bordered={borderPhone}
              style={{
                fontSize:'12px',
                marginLeft:'1rem'
               }}
               onChange={(({target}) => {handleChangePhone(target.value)})}
+              onClick={addBorderPhone}
+              onBlur={deleteBorderPhone}
           />
           </div>
           <div
@@ -138,12 +205,14 @@ export const ContactCard: FC = () => {
             <Input
              type='text'
              value={email}
-             bordered={bordered}
+             bordered={borderEmail}
              style={{
               fontSize:'12px',
               marginLeft:'1rem'
              }}
              onChange={(({target}) => handleChangeEmail(target.value))}
+             onClick={addBorderEmail}
+             onBlur={deleteBorderEmail}
             />
           </div>
           <div
@@ -163,43 +232,51 @@ export const ContactCard: FC = () => {
             <div>
               <Input
                type='text'
-               bordered={bordered}
+               bordered={borderStreet}
                placeholder='улица'
                style={{
                 marginLeft:'1rem'
                }}
                value={street}
                onChange={(({target}) => handleChangeStreet(target.value))}
+               onClick={addBorderStreet}
+               onBlur={deleteBorderStreet}
               />
               <Input
                type='text'
-               bordered={bordered}
+               bordered={borderCity}
                placeholder='город'
                style={{
                 marginLeft:'1rem'
                }}
                value={city}
                onChange={(({target}) => handleChangeCity(target.value))}
+               onClick={addBorderCity}
+               onBlur={deleteBorderCity}
                />
                <Input
                 type='text'
-                bordered={bordered}
+                bordered={borderCountry}
                 placeholder='страна'
                 style={{
                   marginLeft:'1rem'
                 }}
                 value={country}
                 onChange={(({target}) => handleChangeCountry(target.value))}
+                onClick={addBorderCountry}
+                onBlur={deleteBorderCountry}
                />
                <Input
                 type='text'
                 placeholder='индекс'
-                bordered={bordered}
+                bordered={borderZipcode}
                 style={{
                   marginLeft:'1rem'
                 }}
                 value={zipcode}
                 onChange={(({target}) => handleChangeZipcode(target.value))}
+                onClick={addBorderZipcode}
+                onBlur={deleteBorderZipcode}
                />
             </div>
           </div>
@@ -218,13 +295,15 @@ export const ContactCard: FC = () => {
                 заметка
               </h4>
               <TextArea
-               bordered={bordered}
+               bordered={borderNote}
                rows={4}
                style={{
                 marginLeft:'.5rem'
                }}
                value={note}
                onChange={(({target}) => handleChangeNote(target.value))}
+               onClick={addBorderNote}
+               onBlur={deleteBorderNote}
               />
             </div>
        </div>
