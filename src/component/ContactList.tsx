@@ -1,12 +1,16 @@
 import React, { FC } from 'react';
 import { Input } from 'antd'
+import { useAppSelector } from '../hooks/redux';
 import './ContactForm.css'
 
 export const ContactList:FC = () => {
     const { Search } = Input;
 
     const onSearch = (value: string) => console.log(value);
-    
+
+    const contactList = useAppSelector(state => state.contacts);
+
+
   return (
     <div className='container-contact-list'>
         <Search 
@@ -21,9 +25,8 @@ export const ContactList:FC = () => {
               height: '100vh',
               margin: '2rem 1rem 0rem 1rem'}} 
               >
-            <h5>Иванов Иван</h5>
-            <h5>Петоров Петя</h5>
-            <h5>Сидовров Иван</h5>
+            {contactList.map(item => <h5 key={item.id}>{`${item.lastName} ${item.firstName}`}</h5>)}
+            
 
         </div>
     </div>

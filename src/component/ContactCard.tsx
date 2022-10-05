@@ -130,8 +130,7 @@ export const ContactCard: FC = () => {
           bordered={borderFirstName}
           style={{
             fontSize: '18px',
-            fontWeight: 'normal',
-            width: firstName.length > 5 ? `${firstName.length * 12}px` : '70px'
+            fontWeight: 'normal'
           }}
           onChange={(({target}) => {handleChangeFirstName(target.value)})}
           onClick={addBorderFirstName}
