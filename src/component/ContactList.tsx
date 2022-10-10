@@ -1,12 +1,20 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Input } from 'antd'
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../hooks/redux';
+import { fetchContacts } from '../store/reducers/ActionCreaters';
 import './ContactForm.css'
 
 export const ContactList:FC = () => {
     const { Search } = Input;
     const onSearch = (value: string) => console.log(value);
-    const contactList = useAppSelector(state => state.contacts);
+    const contactList = useAppSelector(state => state.contactsSlice.contacts);
+    const dispatch = useAppDispatch();
+  const {contacts} = useAppSelector (state => state.contactsSlice)
+  console.log('contacts: ', contacts);
+
+  useEffect(() => {
+    dispatch(fetchContacts())
+  },[])
       
   return (
     <div className='container-contact-list'>
@@ -25,7 +33,7 @@ export const ContactList:FC = () => {
             {contactList.length > 0 
             ?
             contactList
-              .map(item => <h5 key={item.id}>{`${item.lastName} ${item.firstName}`}</h5>)
+              .map(item => <h5 key={item.id}>{`${item.name}`}</h5>)
             : 
             <h4
               style={{

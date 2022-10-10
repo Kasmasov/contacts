@@ -1,21 +1,19 @@
 
 export type TAdress = {
-    street?: string;
-    city?: string;
-    zipcode?: string;
-    suite?: string;
-    country?: string
+    street: string;
+    city: string;
+    zipcode: string;
+    suite: string;
 };
 
 export type TCard = {
     id: number;
-    firstName?: string;
-    lastName?: string;
-    phone?: string;
-    email?: string;
+    name: string;
+    phone: string;
+    email: string;
     note?: string;
-    company?: string;
-    adress?: TAdress;
+    company: string;
+    adress: TAdress;
 };
 
 export type TContacts = TCard[];

@@ -6,6 +6,7 @@ import { setupStore } from './store/store'
 
 function App() {
   const store = setupStore();
+  
 
   return (
     <div >

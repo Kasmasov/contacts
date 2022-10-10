@@ -1,24 +1,40 @@
-import { TCard } from './../../types/types';
 import { TContacts } from "../../types/types"
 import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
 
-const initialState: TContacts = [
-    { id: 1, firstName: 'Valerii', lastName: 'Kasmasov' },
-    { id: 2, firstName: 'Vadim', lastName: 'Zhukov' },
-    { id: 3, firstName: 'Igor', lastName: 'Abramov' },
-    { id: 4, firstName: 'Igor' },
-]
+type contactsState = {
+    contacts: TContacts,
+    isLoading: boolean,
+    error: string
+}
 
-export const contacts = createSlice({
-    name: 'contacts',
+const initialState: contactsState = {
+    contacts: [],
+    isLoading: false,
+    error: ''
+}
+
+export const contactsSlice = createSlice({
+    name: 'contactsSlice',
     initialState,
     reducers: {
-        addContact(state, action: PayloadAction<TCard>) {
+        contactsFetching(state) {
+            state.isLoading = true;
 
+        },
+        contactsFetchingSuccess(state, action: PayloadAction<TContacts>) {
+            state.isLoading = false;
+            state.error = '';
+            state.contacts = action.payload;
+
+        },
+        contactsFetchingError(state, action: PayloadAction<string>) {
+            state.isLoading = false;
+            state.error = action.payload;
         }
+
 
     }
 })
 
-export default contacts.reducer;
+export default contactsSlice.reducer;

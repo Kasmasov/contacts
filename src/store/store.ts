@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import contactsReducer from './reducers/contactSlice'
 
 const rootReducer = combineReducers({
-    contacts: contactsReducer,
+    contactsSlice: contactsReducer,
 })
 
 export const setupStore = () => {

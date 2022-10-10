@@ -6,10 +6,8 @@ export const ContactCard: FC = () => {
 
   const {TextArea} = Input;
 
-  const [firstName, setFirstName] = useState<string>('');
-  const [borderFirstName, setBorderedFirstName] = useState<boolean>(false);
-  const [lastName, setLastName] = useState<string>('');
-  const [borderLastName, setBorderLasName] = useState<boolean>(false);
+  const [name, setName] = useState<string>('');
+  const [borderName, setBorderedName] = useState<boolean>(false);
   const [company, setCompany] = useState<string>('');
   const [borderCompany, setBorderCompany] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>('');
@@ -29,11 +27,8 @@ export const ContactCard: FC = () => {
 
 
   const handleChangeFirstName = useCallback((value:string): void => {
-    setFirstName(value);
-  },[setFirstName]);
-  const handleChangeLastName = useCallback((value:string):void => {
-    setLastName(value)
-  },[setLastName]);
+    setName(value);
+  },[setName]);
   const handleChangeCompany = useCallback((value:string): void => {
     setCompany(value);
   },[setCompany])
@@ -58,18 +53,12 @@ export const ContactCard: FC = () => {
   const handleChangeNote = useCallback((value:string): void => {
     setNote(value);
   },[setNote])
-  const addBorderFirstName = useCallback((): void => {
-    setBorderedFirstName(true);
-  },[setBorderedFirstName])
-  const deleteBorderFirstName = useCallback((): void => {
-    setBorderedFirstName(false);
-  },[setBorderedFirstName])
-  const addBorderLastName = useCallback(():void => {
-    setBorderLasName(true);
-  },[setBorderLasName])
-  const deleteBorderLastName = useCallback(():void => {
-    setBorderLasName(false);
-  }, [])
+  const addBorderName = useCallback((): void => {
+    setBorderedName(true);
+  },[setBorderedName])
+  const deleteBorderName = useCallback((): void => {
+    setBorderedName(false);
+  },[setBorderedName])
   const addBorderCompany = useCallback((): void => {
     setBorderCompany(true);
   },[setBorderCompany])
@@ -125,30 +114,18 @@ export const ContactCard: FC = () => {
        <div className='top-contact-card pl-8'>
           <Input
           type='text'
-          value={firstName}
+          value={name}
           placeholder ='Имя'
-          bordered={borderFirstName}
+          bordered={borderName}
           style={{
             fontSize: '18px',
             fontWeight: 'normal'
           }}
           onChange={(({target}) => {handleChangeFirstName(target.value)})}
-          onClick={addBorderFirstName}
-          onBlur={deleteBorderFirstName}
+          onClick={addBorderName}
+          onBlur={deleteBorderName}
           />
-          <Input
-            type='text'
-            value={lastName}
-            bordered={borderLastName}
-            placeholder='Фамилия'
-            style={{
-              fontSize:'18px',
-              fontWeight:'normal'
-            }}
-           onChange={(({target}) => {handleChangeLastName (target.value)})}
-           onClick={addBorderLastName}
-           onBlur={deleteBorderLastName}
-          /> 
+          
           <Input
             type='text'
             value={company}
