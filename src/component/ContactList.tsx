@@ -7,10 +7,8 @@ import './ContactForm.css'
 export const ContactList:FC = () => {
     const { Search } = Input;
     const onSearch = (value: string) => console.log(value);
-    const contactList = useAppSelector(state => state.contactsSlice.contacts);
     const dispatch = useAppDispatch();
-  const {contacts} = useAppSelector (state => state.contactsSlice)
-  console.log('contacts: ', contacts);
+    const {contacts} = useAppSelector (state => state.contactsSlice)
 
   useEffect(() => {
     dispatch(fetchContacts())
@@ -30,10 +28,16 @@ export const ContactList:FC = () => {
               height: '100vh',
               margin: '2rem 1rem 0rem 1rem'}} 
               >
-            {contactList.length > 0 
+            {contacts.length > 0 
             ?
-            contactList
-              .map(item => <h5 key={item.id}>{`${item.name}`}</h5>)
+            contacts
+              .map(item => 
+              <h5 
+                key={item.id}
+                onClick={({target})=>{console.log(target)}}
+              >
+                {`${item.name}`}
+              </h5>)
             : 
             <h4
               style={{
