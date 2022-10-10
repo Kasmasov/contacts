@@ -8,7 +8,8 @@ export const fetchContacts = () => async (dispatch: TAppDispatch) => {
         dispatch(contactsSlice.actions.contactsFetching());
         const response = await axios.get<TContacts>('https://jsonplaceholder.typicode.com/users');
         dispatch(contactsSlice.actions.contactsFetchingSuccess(response.data))
-    } catch (e: any) {
-        dispatch(contactsSlice.actions.contactsFetchingError(e.message))
+    } catch (e) {
+        const error = e as Error
+        dispatch(contactsSlice.actions.contactsFetchingError(error.message))
     }
 }
