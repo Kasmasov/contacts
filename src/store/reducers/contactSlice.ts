@@ -5,13 +5,16 @@ import { PayloadAction } from '@reduxjs/toolkit'
 type contactsState = {
     contacts: TContacts,
     isLoading: boolean,
-    error: string
+    error: string,
+    activeContactId: number | undefined,
 }
 
 const initialState: contactsState = {
     contacts: [],
     isLoading: false,
-    error: ''
+    error: '',
+    activeContactId: undefined,
+
 }
 
 export const contactsSlice = createSlice({
@@ -31,6 +34,9 @@ export const contactsSlice = createSlice({
         contactsFetchingError(state, action: PayloadAction<string>) {
             state.isLoading = false;
             state.error = action.payload;
+        },
+        getActiveContactId(state, action: PayloadAction<number | undefined>) {
+            state.activeContactId = action.payload;
         }
 
 

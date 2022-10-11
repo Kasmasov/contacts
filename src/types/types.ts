@@ -1,10 +1,16 @@
 
-export type TAdress = {
+type TAddress = {
     street: string;
     city: string;
     zipcode: string;
     suite: string;
 };
+
+type TCompany = {
+    bs: string;
+    catchPhrase: string;
+    name: string
+}
 
 export type TCard = {
     id: number;
@@ -12,8 +18,8 @@ export type TCard = {
     phone: string;
     email: string;
     note?: string;
-    company: string;
-    adress: TAdress;
+    company: TCompany;
+    address: TAddress;
 };
 
 export type TContacts = TCard[];

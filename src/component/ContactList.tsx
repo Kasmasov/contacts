@@ -1,18 +1,21 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useCallback } from 'react';
 import { Input } from 'antd'
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
-import { fetchContacts } from '../store/reducers/ActionCreaters';
+import { contactsSlice } from '../store/reducers/contactSlice';
 import './ContactForm.css'
+
 
 export const ContactList:FC = () => {
     const { Search } = Input;
     const onSearch = (value: string) => console.log(value);
-    const dispatch = useAppDispatch();
     const {contacts} = useAppSelector (state => state.contactsSlice)
+    const {getActiveContactId} = contactsSlice.actions
+    const dispath = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchContacts())
-  },[])
+  const handleTakesContactID = useCallback((id: number | undefined)=>{
+    dispath(getActiveContactId(id))
+  },[dispath, getActiveContactId])
+  
       
   return (
     <div className='container-contact-list'>
@@ -31,12 +34,14 @@ export const ContactList:FC = () => {
             {contacts.length > 0 
             ?
             contacts
+              .map(contact => contact.name)
+              .sort((contactA, contactB)=> contactA > contactB ? 1 : -1)
               .map(item => 
               <h5 
-                key={item.id}
-                onClick={({target})=>{console.log(target)}}
+                key={contacts.find(contact => contact.name === item)?.id}
+                onClick={()=>{handleTakesContactID(contacts.find(contact => contact.name === item)?.id)}}
               >
-                {`${item.name}`}
+                {`${item}`}
               </h5>)
             : 
             <h4
