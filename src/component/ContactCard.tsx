@@ -140,7 +140,7 @@ export const ContactCard: FC = () => {
      setBorderBottom,
      isActiveContact])
 
-    const handleChangeContact = useCallback(() => {
+    const handleChangeContactButton = useCallback(() => {
      setEditable(prev => !prev);
      if(isActiveContact.length > 0){setEditContactCard(prev => !prev)};
     },[setEditContactCard,
@@ -361,7 +361,7 @@ export const ContactCard: FC = () => {
         </Button>
        <Button 
          size='small'
-         onClick={handleChangeContact}
+         onClick={handleChangeContactButton}
          >
          {editContactCard ? 'Готово':'Изменить'}
         </Button>
