@@ -37,8 +37,7 @@ export const contactsSlice = createSlice({
         },
         getActiveContactId(state, action: PayloadAction<number | undefined>) {
             state.activeContactId = action.payload;
-        }
-
+        },
 
     }
 })

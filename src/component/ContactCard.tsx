@@ -7,8 +7,6 @@ export const ContactCard: FC = () => {
 
   const {activeContactId, contacts} = useAppSelector(state => state.contactsSlice)
   const isActiveContact = contacts.filter(contact => contact.id === activeContactId);
-  console.log('isActiveContact: ', isActiveContact);
-  
 
   const {TextArea} = Input;
 
@@ -25,13 +23,15 @@ export const ContactCard: FC = () => {
   const [city, setCity] = useState<string>('');
   const [borderCity, setBorderCity] = useState<boolean>(false);
   const [suite, setSuite] = useState<string>('');
-  const [borderSuite, setBorderSuite] = useState<boolean>(false)
+  const [borderSuite, setBorderSuite] = useState<boolean>(false);
   const [zipcode, setZipCode] = useState<string>('');
-  const [borderZipcode, setBorderZipcode] = useState<boolean>(false)
+  const [borderZipcode, setBorderZipcode] = useState<boolean>(false);
   const [note, setNote] = useState<string>('');
-  const [borderNote, setBorderNote] = useState<boolean>(false)
+  const [borderNote, setBorderNote] = useState<boolean>(false);
   const [displayUnit, setDisplayUnit] = useState<'none' | 'flex'>('none');
-  const [borderBottom, setBorderBottom] = useState<'' | '1px solid rgb(236,236,236)'>('')
+  const [borderBottom, setBorderBottom] = useState<'' | '1px solid rgb(236,236,236)'>('');
+  const [editable, setEditable] = useState<boolean>(true);
+  const [editContactCard, setEditContactCard] = useState<boolean>(false);
 
 
   const handleChangeFirstName = useCallback((value:string): void => {
@@ -62,56 +62,56 @@ export const ContactCard: FC = () => {
     setNote(value);
   },[setNote])
   const addBorderName = useCallback((): void => {
-    setBorderedName(true);
-  },[setBorderedName])
+    if (!editable){setBorderedName(true)};
+  },[editable, setBorderedName])
   const deleteBorderName = useCallback((): void => {
     setBorderedName(false);
   },[setBorderedName])
   const addBorderCompany = useCallback((): void => {
-    setBorderCompany(true);
-  },[setBorderCompany])
+    if(!editable){setBorderCompany(true)};
+  },[editable, setBorderCompany])
   const deleteBorderCompany = useCallback((): void => {
     setBorderCompany(false);
   },[setBorderCompany])
   const addBorderPhone = useCallback((): void => {
-    setBorderPhone(true);
-  },[setBorderPhone])
+    if(!editable){setBorderPhone(true)};
+  },[editable, setBorderPhone])
   const deleteBorderPhone = useCallback(():void => {
     setBorderPhone(false);
   },[setBorderPhone])
   const addBorderEmail = useCallback((): void => {
-    setBorderEmail(true);
-  },[setBorderEmail])
+    if(!editable){setBorderEmail(true)};
+  },[editable, setBorderEmail])
   const deleteBorderEmail = useCallback((): void => {
     setBorderEmail(false);
   },[setBorderEmail])
   const addBorderStreet = useCallback((): void => {
-    setBorderStreet(true);
-  },[setBorderStreet])
+    if(!editable){setBorderStreet(true)};
+  },[editable, setBorderStreet])
   const deleteBorderStreet = useCallback((): void => {
     setBorderStreet(false);
   },[setBorderStreet])
   const addBorderCity = useCallback((): void => {
-    setBorderCity(true);
-  },[setBorderCity])
+    if(!editable){setBorderCity(true)};
+  },[editable, setBorderCity])
   const deleteBorderCity = useCallback((): void => {
     setBorderCity(false);
   },[setBorderCity])
   const addBorderSuite = useCallback((): void => {
-    setBorderSuite(true);
-  },[setBorderSuite])
+    if(!editable){setBorderSuite(true)};
+  },[editable, setBorderSuite])
   const deleteBorderSuite = useCallback((): void => {
     setBorderSuite(false);
   },[setBorderSuite])
   const addBorderZipcode = useCallback((): void => {
-    setBorderZipcode(true);
-  },[setBorderZipcode])
+    if(!editable){setBorderZipcode(true)};
+  },[editable, setBorderZipcode])
   const deleteBorderZipcode = useCallback((): void => {
     setBorderZipcode(false);
   },[setBorderZipcode])
   const addBorderNote = useCallback((): void => {
-    setBorderNote(true);
-  },[setBorderNote])
+   if(!editable){setBorderNote(true)};
+  },[editable, setBorderNote])
   const deleteBorderNote = useCallback((): void => {
     setBorderNote(false);
   },[setBorderNote])
@@ -130,15 +130,22 @@ export const ContactCard: FC = () => {
       setBorderBottom('1px solid rgb(236,236,236)');
     }
   },[setName,
-    setCompany,
-    setPhone,
-    setEmail,
-    setStreet,
-    setCity,
-    setSuite,
-    setDisplayUnit,
-    setBorderBottom,
-    isActiveContact])
+     setCompany,
+     setPhone,
+     setEmail,
+     setStreet,
+     setCity,
+     setSuite,
+     setDisplayUnit,
+     setBorderBottom,
+     isActiveContact])
+
+    const handleChangeContact = useCallback(() => {
+     setEditable(prev => !prev);
+     if(isActiveContact.length > 0){setEditContactCard(prev => !prev)};
+    },[setEditContactCard,
+       setEditable,
+       isActiveContact])
 
 
   return (
@@ -149,6 +156,7 @@ export const ContactCard: FC = () => {
           value={name}
           placeholder ='Имя'
           bordered={borderName}
+          readOnly={editable}
           style={{
             display: displayUnit,
             fontSize: '18px',
@@ -164,6 +172,7 @@ export const ContactCard: FC = () => {
             value={company}
             bordered={borderCompany}
             placeholder='Компания'
+            readOnly={editable}
             style={{
               fontSize:'12px',
               display: displayUnit,
@@ -199,6 +208,7 @@ export const ContactCard: FC = () => {
              type='text'
              value={phone}
              bordered={borderPhone}
+             readOnly={editable}
              style={{
                fontSize:'12px',
                marginLeft:'1rem',
@@ -228,6 +238,7 @@ export const ContactCard: FC = () => {
              type='text'
              value={email}
              bordered={borderEmail}
+             readOnly={editable}
              style={{
               fontSize:'12px',
               marginLeft:'1rem',
@@ -258,6 +269,7 @@ export const ContactCard: FC = () => {
                type='text'
                bordered={borderStreet}
                placeholder='улица'
+               readOnly={editable}
                style={{
                 marginLeft:'1rem',
                 display: displayUnit,
@@ -271,6 +283,7 @@ export const ContactCard: FC = () => {
                type='text'
                bordered={borderCity}
                placeholder='город'
+               readOnly={editable}
                style={{
                 marginLeft:'1rem',
                 display: displayUnit,
@@ -284,6 +297,7 @@ export const ContactCard: FC = () => {
                 type='text'
                 bordered={borderSuite}
                 placeholder='апартаменты'
+                readOnly={editable}
                 style={{
                   marginLeft:'1rem',
                   display: displayUnit,
@@ -297,6 +311,7 @@ export const ContactCard: FC = () => {
                 type='text'
                 placeholder='индекс'
                 bordered={borderZipcode}
+                readOnly={editable}
                 style={{
                   marginLeft:'1rem',
                   display: displayUnit,
@@ -326,6 +341,7 @@ export const ContactCard: FC = () => {
               <TextArea
                bordered={borderNote}
                rows={4}
+               readOnly={editable}
                style={{
                 marginLeft:'.5rem',
                 display: displayUnit,
@@ -345,8 +361,9 @@ export const ContactCard: FC = () => {
         </Button>
        <Button 
          size='small'
+         onClick={handleChangeContact}
          >
-         Изменить
+         {editContactCard ? 'Готово':'Изменить'}
         </Button>
        </div>
     </div>
