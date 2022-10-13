@@ -6,14 +6,14 @@ type contactsState = {
     contacts: TContacts,
     isLoading: boolean,
     error: string,
-    activeContactId: number | undefined,
+    activeContactId: number,
 }
 
 const initialState: contactsState = {
     contacts: [],
     isLoading: false,
     error: '',
-    activeContactId: undefined,
+    activeContactId: 0,
 
 }
 
@@ -35,9 +35,13 @@ export const contactsSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
-        getActiveContactId(state, action: PayloadAction<number | undefined>) {
+        getActiveContactId(state, action: PayloadAction<number>) {
             state.activeContactId = action.payload;
         },
+        getActivContactData(state, action: PayloadAction<string>) {
+            const indexContact = state.contacts.findIndex(({ id }) => id === state.activeContactId)
+            console.log('indexContact: ', indexContact);
+        }
 
     }
 })

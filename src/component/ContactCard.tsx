@@ -1,12 +1,14 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Button, Input } from 'antd'
 import './ContactForm.css'
-import { useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { contactsSlice } from '../store/reducers/contactSlice'
 
 export const ContactCard: FC = () => {
 
-  const {activeContactId, contacts} = useAppSelector(state => state.contactsSlice)
+  const { activeContactId, contacts } = useAppSelector(state => state.contactsSlice)
   const isActiveContact = contacts.filter(contact => contact.id === activeContactId);
+
 
   const {TextArea} = Input;
 
@@ -36,7 +38,7 @@ export const ContactCard: FC = () => {
 
   const handleChangeFirstName = useCallback((value:string): void => {
     setName(value);
-  },[setName]);
+  },[]);
   const handleChangeCompany = useCallback((value:string): void => {
     setCompany(value);
   },[setCompany])
@@ -118,24 +120,25 @@ export const ContactCard: FC = () => {
 
   useEffect(() => {
     if (isActiveContact.length !== 0){
-      setName(isActiveContact[0].name);
-      setCompany(isActiveContact[0].company.name);
-      setPhone(isActiveContact[0].phone);
-      setEmail(isActiveContact[0].email);
-      setStreet(isActiveContact[0].address.street);
-      setCity(isActiveContact[0].address.city);
-      setSuite(isActiveContact[0].address.suite);
-      setZipCode(isActiveContact[0].address.zipcode);
+      // setName(isActiveContact[0].name);
+      // setCompany(isActiveContact[0].company.name);
+      // setPhone(isActiveContact[0].phone);
+      // setEmail(isActiveContact[0].email);
+      // setStreet(isActiveContact[0].address.street);
+      // setCity(isActiveContact[0].address.city);
+      // setSuite(isActiveContact[0].address.suite);
+      // setZipCode(isActiveContact[0].address.zipcode);
       setDisplayUnit('flex');
       setBorderBottom('1px solid rgb(236,236,236)');
     }
-  },[setName,
-     setCompany,
-     setPhone,
-     setEmail,
-     setStreet,
-     setCity,
-     setSuite,
+  },[
+    //  setName,
+  //    setCompany,
+  //    setPhone,
+  //    setEmail,
+  //    setStreet,
+  //    setCity,
+  //    setSuite,
      setDisplayUnit,
      setBorderBottom,
      isActiveContact])

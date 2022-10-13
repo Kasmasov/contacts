@@ -12,7 +12,7 @@ export const ContactList:FC = () => {
     const {getActiveContactId} = contactsSlice.actions
     const dispath = useAppDispatch();
 
-  const handleTakesContactID = useCallback((id: number | undefined)=>{
+  const handleGetContactID = useCallback((id: number)=>{
     dispath(getActiveContactId(id))
   },[dispath, getActiveContactId])
   
@@ -39,7 +39,7 @@ export const ContactList:FC = () => {
               .map(item => 
               <h5 
                 key={contacts.find(contact => contact.name === item)?.id}
-                onClick={()=>{handleTakesContactID(contacts.find(contact => contact.name === item)?.id)}}
+                // onClick={()=>{handleGetContactID(contacts.find(contact => contact.name === item)?.id)}}
               >
                 {`${item}`}
               </h5>)
