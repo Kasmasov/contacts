@@ -2,7 +2,6 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Button, Input } from 'antd'
 import './ContactForm.css'
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { contactsSlice } from '../store/reducers/contactSlice'
 
 export const ContactCard: FC = () => {
 
@@ -12,23 +11,32 @@ export const ContactCard: FC = () => {
 
   const {TextArea} = Input;
 
-  const [name, setName] = useState<string>('');
+  // const [name, setName] = useState<string>('');
+  const name = useAppSelector(state => state.contactsSlice.activeContact.name);
   const [borderName, setBorderedName] = useState<boolean>(false);
-  const [company, setCompany] = useState<string>('');
+  // const [company, setCompany] = useState<string>('');
+  const companyName = useAppSelector( state => state.contactsSlice.activeContact.company.name);
   const [borderCompany, setBorderCompany] = useState<boolean>(false);
-  const [phone, setPhone] = useState<string>('');
+  // const [phone, setPhone] = useState<string>('');
+  const phone = useAppSelector( state => state.contactsSlice.activeContact.phone);
   const [borderPhone, setBorderPhone] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>('');
+  // const [email, setEmail] = useState<string>('');
+  const email = useAppSelector( state => state.contactsSlice.activeContact.email);
   const [borderEmail, setBorderEmail] = useState<boolean>(false);
-  const [street, setStreet] = useState<string>('');
+  // const [street, setStreet] = useState<string>('');
+  const street = useAppSelector(state => state.contactsSlice.activeContact.address.street);
   const [borderStreet, setBorderStreet] = useState<boolean>(false);
-  const [city, setCity] = useState<string>('');
+  // const [city, setCity] = useState<string>('');
+  const city = useAppSelector(state => state.contactsSlice.activeContact.address.city);
   const [borderCity, setBorderCity] = useState<boolean>(false);
-  const [suite, setSuite] = useState<string>('');
+  // const [suite, setSuite] = useState<string>('');
+  const suite = useAppSelector(state => state.contactsSlice.activeContact.address.suite);
   const [borderSuite, setBorderSuite] = useState<boolean>(false);
-  const [zipcode, setZipCode] = useState<string>('');
+  // const [zipcode, setZipCode] = useState<string>('');
+  const zipcode = useAppSelector(state => state.contactsSlice.activeContact.address.zipcode);
   const [borderZipcode, setBorderZipcode] = useState<boolean>(false);
-  const [note, setNote] = useState<string>('');
+  // const [note, setNote] = useState<string>('');
+  const note = useAppSelector(state => state.contactsSlice.activeContact.note);
   const [borderNote, setBorderNote] = useState<boolean>(false);
   const [displayUnit, setDisplayUnit] = useState<'none' | 'flex'>('none');
   const [borderBottom, setBorderBottom] = useState<'' | '1px solid rgb(236,236,236)'>('');
@@ -37,32 +45,32 @@ export const ContactCard: FC = () => {
 
 
   const handleChangeFirstName = useCallback((value:string): void => {
-    setName(value);
+    // setName(value);
   },[]);
   const handleChangeCompany = useCallback((value:string): void => {
-    setCompany(value);
-  },[setCompany])
+    // setCompany(value);
+  },[])
   const handleChangePhone = useCallback((value:string): void => {
-    setPhone(value);
-  },[setPhone])
+    // setPhone(value);
+  },[])
   const handleChangeEmail = useCallback((value:string): void => {
-    setEmail(value);
-  },[setEmail])
+    // setEmail(value);
+  },[])
   const handleChangeStreet = useCallback((value:string): void => {
-    setStreet(value);
-  },[setStreet])
+    // setStreet(value);
+  },[])
   const handleChangeCity = useCallback((value:string): void => {
-    setCity(value);
-  },[setCity])
+    // setCity(value);
+  },[])
   const handleChangeSuite = useCallback((value:string): void => {
-    setSuite(value);
-  },[setSuite])
+    // setSuite(value);
+  },[])
   const handleChangeZipcode = useCallback((value: string): void => {
-    setZipCode(value);
-  }, [setZipCode])
+    // setZipCode(value);
+  }, [])
   const handleChangeNote = useCallback((value:string): void => {
-    setNote(value);
-  },[setNote])
+    // setNote(value);
+  },[])
   const addBorderName = useCallback((): void => {
     if (!editable){setBorderedName(true)};
   },[editable, setBorderedName])
@@ -172,7 +180,7 @@ export const ContactCard: FC = () => {
           
           <Input
             type='text'
-            value={company}
+            value={companyName}
             bordered={borderCompany}
             placeholder='Компания'
             readOnly={editable}

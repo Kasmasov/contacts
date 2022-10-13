@@ -9,12 +9,13 @@ export const ContactList:FC = () => {
     const { Search } = Input;
     const onSearch = (value: string) => console.log(value);
     const {contacts} = useAppSelector (state => state.contactsSlice)
-    const {getActiveContactId} = contactsSlice.actions
+    const {getActiveContactId, getActivContactData} = contactsSlice.actions
     const dispath = useAppDispatch();
 
   const handleGetContactID = useCallback((id: number)=>{
     dispath(getActiveContactId(id))
-  },[dispath, getActiveContactId])
+    dispath(getActivContactData())
+  },[dispath, getActiveContactId, getActivContactData])
   
       
   return (
@@ -34,14 +35,13 @@ export const ContactList:FC = () => {
             {contacts.length > 0 
             ?
             contacts
-              .map(contact => contact.name)
-              .sort((contactA, contactB)=> contactA > contactB ? 1 : -1)
+              // .sort((contactA, contactB)=> contactA.name > contactB.name ? 1 : -1)
               .map(item => 
               <h5 
-                key={contacts.find(contact => contact.name === item)?.id}
-                // onClick={()=>{handleGetContactID(contacts.find(contact => contact.name === item)?.id)}}
+                key={item.id}
+                onClick={()=>{handleGetContactID(item.id)}}
               >
-                {`${item}`}
+                {`${item.name}`}
               </h5>)
             : 
             <h4
