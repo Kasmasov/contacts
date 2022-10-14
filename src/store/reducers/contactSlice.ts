@@ -2,6 +2,7 @@ import { TCard } from './../../types/types';
 import { TContacts } from "../../types/types"
 import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
+import { act } from 'react-dom/test-utils';
 
 type contactsState = {
     contacts: TContacts,
@@ -69,6 +70,33 @@ export const contactsSlice = createSlice({
             state.activeContact.address.suite = stateContactsIndex.address.suite;
             state.activeContact.address.zipcode = stateContactsIndex.address.zipcode;
             state.activeContact.company.name = stateContactsIndex.company.name;
+        },
+        changeActiveContactName(state, action: PayloadAction<string>) {
+            state.activeContact.name = action.payload;
+        },
+        changeActiveContactCompanyName(state, action: PayloadAction<string>) {
+            state.activeContact.company.name = action.payload;
+        },
+        changeActiveContactPhone(state, action: PayloadAction<string>) {
+            state.activeContact.phone = action.payload;
+        },
+        changeActiveContactEmail(state, action: PayloadAction<string>) {
+            state.activeContact.email = action.payload;
+        },
+        changeActiveContactStreet(state, action: PayloadAction<string>) {
+            state.activeContact.address.street = action.payload;
+        },
+        changeActiveContactCity(state, action: PayloadAction<string>) {
+            state.activeContact.address.city = action.payload;
+        },
+        changeActiveContactSuite(state, action: PayloadAction<string>) {
+            state.activeContact.address.suite = action.payload;
+        },
+        changeActiveContactZipcode(state, action: PayloadAction<string>) {
+            state.activeContact.address.zipcode = action.payload;
+        },
+        changeActionContactNode(state, action: PayloadAction<string>) {
+            state.activeContact.note = action.payload
         }
 
     }
