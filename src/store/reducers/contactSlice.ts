@@ -2,7 +2,6 @@ import { TCard } from './../../types/types';
 import { TContacts } from "../../types/types"
 import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { act } from 'react-dom/test-utils';
 
 type contactsState = {
     contacts: TContacts,
@@ -95,8 +94,46 @@ export const contactsSlice = createSlice({
         changeActiveContactZipcode(state, action: PayloadAction<string>) {
             state.activeContact.address.zipcode = action.payload;
         },
-        changeActionContactNode(state, action: PayloadAction<string>) {
+        changeActionContactNote(state, action: PayloadAction<string>) {
             state.activeContact.note = action.payload
+        },
+        saveActiveContactData(state) {
+            const indexContact = state.contacts.findIndex(({ id }) => id === state.activeContactId);
+            const stateContactIndex = state.contacts[indexContact];
+            stateContactIndex.name = state.activeContact.name;
+            stateContactIndex.company.name = state.activeContact.company.name;
+            stateContactIndex.phone = state.activeContact.phone;
+            stateContactIndex.email = state.activeContact.email;
+            stateContactIndex.note = state.activeContact.note;
+            stateContactIndex.address.street = state.activeContact.address.street;
+            stateContactIndex.address.city = state.activeContact.address.city;
+            stateContactIndex.address.suite = state.activeContact.address.suite;
+            stateContactIndex.address.zipcode = state.activeContact.address.zipcode;
+        },
+        createNewContact(state) {
+            const maxId = state.contacts.map(item => item.id).sort((min, max) => (min - max));
+            const createNewContactID = maxId.length + 1;
+            state.activeContactId = createNewContactID;
+            // const stateContactIndex = state.contacts[createNewContactID]
+            const newContact = {
+                id: createNewContactID,
+                name: 'Без имени',
+                company: {
+                    bs: '',
+                    name: '',
+                    catchPhrase: ''
+                },
+                phone: '',
+                email: '',
+                note: '',
+                address: {
+                    street: '',
+                    city: '',
+                    suite: '',
+                    zipcode: ''
+                }
+            };
+            state.contacts = [...state.contacts, newContact];
         }
 
     }

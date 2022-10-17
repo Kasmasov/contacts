@@ -39,6 +39,9 @@ export const ContactList:FC = () => {
               .map(item => 
               <h5 
                 key={item.id}
+                style={{
+                  cursor:'pointer'
+                }}
                 onClick={()=>{handleGetContactID(item.id)}}
               >
                 {`${item.name}`}

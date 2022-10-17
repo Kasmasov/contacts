@@ -16,10 +16,12 @@ export const ContactCard: FC = () => {
          changeActiveContactCity,
          changeActiveContactSuite,
          changeActiveContactZipcode,
-         changeActionContactNode
+         changeActionContactNote,
+         saveActiveContactData,
+         getActivContactData,
+         createNewContact
         } = contactsSlice.actions;
   const dispatch = useAppDispatch();
-
 
   const {TextArea} = Input;
 
@@ -72,8 +74,9 @@ export const ContactCard: FC = () => {
     dispatch(changeActiveContactZipcode(value))
   }, [dispatch, changeActiveContactZipcode])
   const handleChangeNote = useCallback((value:string): void => {
-    dispatch(changeActionContactNode(value))
-  },[dispatch, changeActionContactNode])
+    dispatch(changeActionContactNote(value))
+  },[dispatch, changeActionContactNote])
+
   const addBorderName = useCallback((): void => {
     if (!editable){setBorderedName(true)};
   },[editable, setBorderedName])
@@ -142,9 +145,23 @@ export const ContactCard: FC = () => {
     const handleChangeContactButton = useCallback(() => {
      setEditable(prev => !prev);
      if(isActiveContact.length > 0){setEditContactCard(prev => !prev)};
+     if(editContactCard){dispatch(saveActiveContactData())}
     },[setEditContactCard,
        setEditable,
-       isActiveContact])
+       dispatch,
+       isActiveContact,
+       editContactCard,
+       saveActiveContactData])
+    const handleCreateNewContact = useCallback((): void => {
+      dispatch(createNewContact());
+      dispatch(getActivContactData());
+      setEditable(false);
+      setEditContactCard(true);
+    },[dispatch,
+       createNewContact,
+       getActivContactData,
+       setEditable,
+       setEditContactCard])
 
 
   return (
@@ -355,6 +372,7 @@ export const ContactCard: FC = () => {
         <div className='bottom-contact-card'>
        <Button 
          size='small'
+         onClick = {handleCreateNewContact}
        >
          +
         </Button>
