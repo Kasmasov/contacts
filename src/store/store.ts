@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import modalReducer from './reducers/modalSlice';
 import contactsReducer from './reducers/contactSlice'
 
 const rootReducer = combineReducers({
     contactsSlice: contactsReducer,
+    modalSlice: modalReducer,
 })
 
 export const setupStore = () => {

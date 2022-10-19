@@ -114,7 +114,6 @@ export const contactsSlice = createSlice({
             const maxId = state.contacts.map(item => item.id).sort((min, max) => (min - max));
             const createNewContactID = maxId.length + 1;
             state.activeContactId = createNewContactID;
-            // const stateContactIndex = state.contacts[createNewContactID]
             const newContact = {
                 id: createNewContactID,
                 name: 'Без имени',

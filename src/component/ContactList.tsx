@@ -1,8 +1,9 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Input } from 'antd'
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { contactsSlice } from '../store/reducers/contactSlice';
 import './ContactForm.css'
+import { modalSlice } from '../store/reducers/modalSlice';
 
 
 export const ContactList:FC = () => {
@@ -11,22 +12,34 @@ export const ContactList:FC = () => {
 
     const {contacts} = useAppSelector (state => state.contactsSlice)
     const selectedContactsUsingSearch = serchingText === '' ? contacts : contacts.filter(item => item.name.trim().toLowerCase().includes(serchingText));
-    const {getActiveContactId, getActivContactData} = contactsSlice.actions;
+    const { activeModalDeleteContact } = useAppSelector(state => state.modalSlice)
+    const { mainScreenOpacity } = useAppSelector(state => state.modalSlice);
+    const { getActiveContactId, getActivContactData } = contactsSlice.actions;
+    const { displayModal } = modalSlice.actions;
     const dispath = useAppDispatch();
     
     const handleChangeSerching = (value: string): void =>{
       setSerchingText(value.trim().toLowerCase());
     };
     const handleGetContactID = useCallback((id: number)=>{
+     if (!activeModalDeleteContact) {
       dispath(getActiveContactId(id))
       dispath(getActivContactData())
+      dispath(displayModal(false))
+    }
     },[dispath,
        getActiveContactId,
-       getActivContactData]);
+       getActivContactData,
+       displayModal,
+       activeModalDeleteContact]);
   
       
   return (
-    <div className='container-contact-list'>
+    <div className='container-contact-list'
+      style={{
+        opacity:`${mainScreenOpacity}`
+      }}
+    >
         <Input 
           placeholder="input search text" 
           onChange={(({target}) => handleChangeSerching(target.value))}

@@ -3,24 +3,28 @@ import { Button, Input } from 'antd'
 import './ContactForm.css'
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { contactsSlice } from '../store/reducers/contactSlice';
+import { modalSlice } from '../store/reducers/modalSlice';
 
 export const ContactCard: FC = () => {
 
   const { activeContactId, contacts } = useAppSelector(state => state.contactsSlice)
   const isActiveContact = contacts.filter(contact => contact.id === activeContactId);
   const {changeActiveContactName, 
-         changeActiveContactCompanyName,
-         changeActiveContactPhone,
-         changeActiveContactEmail,
-         changeActiveContactStreet,
-         changeActiveContactCity,
-         changeActiveContactSuite,
-         changeActiveContactZipcode,
-         changeActionContactNote,
-         saveActiveContactData,
-         getActivContactData,
-         createNewContact
-        } = contactsSlice.actions;
+    changeActiveContactCompanyName,
+    changeActiveContactPhone,
+    changeActiveContactEmail,
+    changeActiveContactStreet,
+    changeActiveContactCity,
+    changeActiveContactSuite,
+    changeActiveContactZipcode,
+    changeActionContactNote,
+    saveActiveContactData,
+    getActivContactData,
+    createNewContact
+  } = contactsSlice.actions;
+  const { displayModal } = modalSlice.actions;
+  const { activeModalDeleteContact, mainScreenOpacity } = useAppSelector(state => state.modalSlice);
+  const { changeMainScreenOpacity } = modalSlice.actions;
   const dispatch = useAppDispatch();
 
   const {TextArea} = Input;
@@ -152,20 +156,34 @@ export const ContactCard: FC = () => {
        isActiveContact,
        editContactCard,
        saveActiveContactData])
+
     const handleCreateNewContact = useCallback((): void => {
       dispatch(createNewContact());
       dispatch(getActivContactData());
       setEditable(false);
       setEditContactCard(true);
+      dispatch(displayModal(false))
     },[dispatch,
        createNewContact,
        getActivContactData,
        setEditable,
-       setEditContactCard])
+       setEditContactCard,
+       displayModal])
+
+    const handleDeleteContact = useCallback ((): void => {
+      dispatch(displayModal(true));
+      dispatch(changeMainScreenOpacity('0.25'))
+    },[dispatch,
+      displayModal,
+      changeMainScreenOpacity])
 
 
   return (
-    <div className='container-contact-card'>
+    <div className='container-contact-card'
+    style={{
+      opacity:`${mainScreenOpacity}`
+    }}
+    >
       <div className='top-contact-card pl-8'>
           <Input
           type='text'
@@ -370,15 +388,29 @@ export const ContactCard: FC = () => {
             </div>
        </div>
         <div className='bottom-contact-card'>
+       <div>
        <Button 
          size='small'
          onClick = {handleCreateNewContact}
+         disabled={activeModalDeleteContact ? true : false}
        >
          +
         </Button>
+        <Button
+        size='small'
+        style={{
+          marginLeft:'10px'
+        }}
+        onClick={handleDeleteContact}
+        disabled={isActiveContact.length === 0 ? true : false}
+        >
+          -
+        </Button>
+        </div>
        <Button 
          size='small'
          onClick={handleChangeContactButton}
+         disabled={activeModalDeleteContact ? true : false} 
          >
          {editContactCard ? 'Готово':'Изменить'}
         </Button>
