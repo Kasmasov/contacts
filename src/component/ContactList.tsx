@@ -14,7 +14,9 @@ export const ContactList:FC = () => {
     const selectedContactsUsingSearch = serchingText === '' ? contacts : contacts.filter(item => item.name.trim().toLowerCase().includes(serchingText));
     const { activeModalDeleteContact } = useAppSelector(state => state.modalSlice)
     const { mainScreenOpacity } = useAppSelector(state => state.modalSlice);
-    const { getActiveContactId, getActivContactData } = contactsSlice.actions;
+    const { getActiveContactId,
+            getActivContactData,
+            saveActiveContactData } = contactsSlice.actions;
     const { displayModal } = modalSlice.actions;
     const dispath = useAppDispatch();
     
@@ -23,15 +25,17 @@ export const ContactList:FC = () => {
     };
     const handleGetContactID = useCallback((id: number)=>{
      if (!activeModalDeleteContact) {
-      dispath(getActiveContactId(id))
-      dispath(getActivContactData())
-      dispath(displayModal(false))
+       dispath(getActiveContactId(id));
+       dispath(getActivContactData());
+       dispath(displayModal(false));
+
     }
     },[dispath,
        getActiveContactId,
        getActivContactData,
        displayModal,
-       activeModalDeleteContact]);
+       activeModalDeleteContact,
+      ]);
   
       
   return (

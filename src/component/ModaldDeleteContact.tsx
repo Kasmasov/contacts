@@ -2,12 +2,14 @@ import React, { FC, useCallback } from 'react'
 import { Button } from 'antd'
 import { modalSlice } from '../store/reducers/modalSlice'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { contactsSlice } from '../store/reducers/contactSlice'
 
 
 export const ModalDeleteContact: FC = () => {
     const dispatch = useAppDispatch();
     const { displayModal, changeMainScreenOpacity } = modalSlice.actions;
-    const { contacts, activeContactId} = useAppSelector(state => state.contactsSlice);
+    const { deleteContact, getBorderBottom } = contactsSlice.actions;
+    const { contacts,activeContactId} = useAppSelector(state => state.contactsSlice);
 
     const handleCancelDelete = useCallback((): void => {
         dispatch(displayModal(false));
@@ -15,6 +17,21 @@ export const ModalDeleteContact: FC = () => {
     },[dispatch,
        displayModal,
        changeMainScreenOpacity])
+
+    const handleDeleteContact = useCallback((): void =>{
+        const newContacts = contacts.filter(contact => contact.id !== activeContactId);
+        dispatch(deleteContact(newContacts));
+        dispatch(displayModal(false));
+        dispatch(changeMainScreenOpacity('1'));
+        dispatch(getBorderBottom(''));
+    },[dispatch,
+       deleteContact,
+       contacts,
+       activeContactId,
+       displayModal,
+       changeMainScreenOpacity,
+       getBorderBottom
+    ])
 
 
     return(
@@ -28,7 +45,7 @@ export const ModalDeleteContact: FC = () => {
             style={{
                 marginBottom:'20px'
             }}
-            >{contacts.filter(({id}) => id === activeContactId)[0].name}</h2>
+            >{contacts.filter(({id}) => id === activeContactId)[0]?.name}</h2>
            <div> <Button
             size='small'
             onClick={handleCancelDelete}
@@ -41,6 +58,7 @@ export const ModalDeleteContact: FC = () => {
             style={{
                 marginLeft:'15px'
             }}
+            onClick={handleDeleteContact}
             >
                 Удалить
             </Button>

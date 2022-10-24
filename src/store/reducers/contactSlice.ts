@@ -9,6 +9,7 @@ type contactsState = {
     error: string,
     activeContactId: number,
     activeContact: TCard,
+    borderBottom: '' | '1px solid rgb(236,236,236)',
 }
 
 const initialState: contactsState = {
@@ -16,6 +17,7 @@ const initialState: contactsState = {
     isLoading: false,
     error: '',
     activeContactId: 0,
+    borderBottom: '',
     activeContact: {
         id: 0,
         name: '',
@@ -133,7 +135,15 @@ export const contactsSlice = createSlice({
                 }
             };
             state.contacts = [...state.contacts, newContact];
-        }
+        },
+        deleteContact(state, action: PayloadAction<TCard[]>) {
+            state.contacts = action.payload;
+        },
+        getBorderBottom(state, action: PayloadAction<'' | '1px solid rgb(236,236,236)'>) {
+            state.borderBottom = action.payload
+        },
+
+
 
     }
 })

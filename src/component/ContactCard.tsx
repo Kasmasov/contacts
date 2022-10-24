@@ -20,7 +20,8 @@ export const ContactCard: FC = () => {
     changeActionContactNote,
     saveActiveContactData,
     getActivContactData,
-    createNewContact
+    createNewContact,
+    getBorderBottom
   } = contactsSlice.actions;
   const { displayModal } = modalSlice.actions;
   const { activeModalDeleteContact, mainScreenOpacity } = useAppSelector(state => state.modalSlice);
@@ -38,6 +39,7 @@ export const ContactCard: FC = () => {
   const suite = useAppSelector(state => state.contactsSlice.activeContact.address.suite);
   const zipcode = useAppSelector(state => state.contactsSlice.activeContact.address.zipcode);
   const note = useAppSelector(state => state.contactsSlice.activeContact.note);
+  const borderBottom = useAppSelector(state => state.contactsSlice.borderBottom)
 
   const [borderName, setBorderedName] = useState<boolean>(false);
   const [borderCompany, setBorderCompany] = useState<boolean>(false);
@@ -49,7 +51,6 @@ export const ContactCard: FC = () => {
   const [borderZipcode, setBorderZipcode] = useState<boolean>(false);
   const [borderNote, setBorderNote] = useState<boolean>(false);
   const [displayUnit, setDisplayUnit] = useState<'none' | 'flex'>('none');
-  const [borderBottom, setBorderBottom] = useState<'' | '1px solid rgb(236,236,236)'>('');
   const [editable, setEditable] = useState<boolean>(true);
   const [editContactCard, setEditContactCard] = useState<boolean>(false);
 
@@ -139,12 +140,16 @@ export const ContactCard: FC = () => {
   useEffect(() => {
     if (isActiveContact.length !== 0){
       setDisplayUnit('flex');
-      setBorderBottom('1px solid rgb(236,236,236)');
+      dispatch(getBorderBottom('1px solid rgb(236,236,236)'));
     }
-  },[
+    if (isActiveContact.length === 0){
+      setDisplayUnit('none')
+    }
+  },[dispatch,
      setDisplayUnit,
-     setBorderBottom,
-     isActiveContact])
+     getBorderBottom,
+     isActiveContact,
+    ])
 
     const handleChangeContactButton = useCallback(() => {
      setEditable(prev => !prev);
@@ -410,7 +415,7 @@ export const ContactCard: FC = () => {
        <Button 
          size='small'
          onClick={handleChangeContactButton}
-         disabled={activeModalDeleteContact ? true : false} 
+         disabled={activeModalDeleteContact || isActiveContact.length === 0 ? true : false} 
          >
          {editContactCard ? 'Готово':'Изменить'}
         </Button>
