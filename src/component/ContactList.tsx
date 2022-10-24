@@ -16,7 +16,7 @@ export const ContactList:FC = () => {
     const { mainScreenOpacity } = useAppSelector(state => state.modalSlice);
     const { getActiveContactId,
             getActivContactData,
-            saveActiveContactData } = contactsSlice.actions;
+          } = contactsSlice.actions;
     const { displayModal } = modalSlice.actions;
     const dispath = useAppDispatch();
     
@@ -27,9 +27,8 @@ export const ContactList:FC = () => {
      if (!activeModalDeleteContact) {
        dispath(getActiveContactId(id));
        dispath(getActivContactData());
-       dispath(displayModal(false));
-
-    }
+       dispath(displayModal(false)); 
+      }
     },[dispath,
        getActiveContactId,
        getActivContactData,
