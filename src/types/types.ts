@@ -12,8 +12,8 @@ type TCompany = {
     name: string
 }
 
-export type TCard = {
-    id: number;
+export type TCardFromBackEnd = {
+    id: string;
     name: string;
     phone: string;
     email: string;
@@ -22,8 +22,19 @@ export type TCard = {
     address: TAddress;
 };
 
-export type TContacts = TCard[];
+export type TCardForFrontEnd = {
+    id: string;
+    idForFrontEnd: string;
+    name: string;
+    phone: string;
+    email: string;
+    note?: string;
+    company: TCompany;
+    address: TAddress;
+}
 
-export type TItemList = keyof TCard;
+export type TContacts = TCardForFrontEnd[];
+
+export type TItemList = keyof TCardFromBackEnd;
 
 export type TList = TItemList[];

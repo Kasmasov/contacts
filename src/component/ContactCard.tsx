@@ -8,7 +8,7 @@ import { modalSlice } from '../store/reducers/modalSlice';
 export const ContactCard: FC = () => {
 
   const { activeContactId, contacts } = useAppSelector(state => state.contactsSlice)
-  const isActiveContact = contacts.filter(contact => contact.id === activeContactId);
+  const isActiveContact = contacts.filter(contact => contact.idForFrontEnd === activeContactId);
   const {changeActiveContactName, 
     changeActiveContactCompanyName,
     changeActiveContactPhone,
@@ -177,7 +177,7 @@ export const ContactCard: FC = () => {
 
     const handleDeleteContact = useCallback ((): void => {
       dispatch(displayModal(true));
-      dispatch(changeMainScreenOpacity('0.25'))
+      dispatch(changeMainScreenOpacity('0.25'));
     },[dispatch,
       displayModal,
       changeMainScreenOpacity])

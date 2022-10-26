@@ -22,7 +22,7 @@ export const ContactForm: FC= () => {
         <ContactList />
         <ContactCard />
        {activeModalDeleteContact &&
-       activeContactId !== 0 &&
+       activeContactId !== '' &&
        <ModalDeleteContact/>}
     </div>
   )

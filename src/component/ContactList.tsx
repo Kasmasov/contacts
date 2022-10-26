@@ -23,7 +23,7 @@ export const ContactList:FC = () => {
     const handleChangeSerching = (value: string): void =>{
       setSerchingText(value.trim().toLowerCase());
     };
-    const handleGetContactID = useCallback((id: number)=>{
+    const handleGetContactID = useCallback((id: string)=>{
      if (!activeModalDeleteContact) {
        dispath(getActiveContactId(id));
        dispath(getActivContactData());
@@ -53,19 +53,20 @@ export const ContactList:FC = () => {
         <div
           style={{
               height: '100vh',
-              margin: '2rem 1rem 0rem 1rem'}} 
-              >
+              margin: '2rem 1rem 0rem 1rem',
+              overflow: 'scroll'}} 
+        >
             {contacts.length > 0 
             ?
             selectedContactsUsingSearch
               // .sort((contactA, contactB)=> contactA.name > contactB.name ? 1 : -1)
               .map(item => 
               <h5 
-                key={item.id}
+                key={item.idForFrontEnd}
                 style={{
                   cursor:'pointer'
                 }}
-                onClick={()=>{handleGetContactID(item.id)}}
+                onClick={()=>{handleGetContactID(item.idForFrontEnd)}}
               >
                 {`${item.name}`}
               </h5>)

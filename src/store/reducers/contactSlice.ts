@@ -1,14 +1,15 @@
-import { TCard } from './../../types/types';
+import { TCardForFrontEnd } from './../../types/types';
 import { TContacts } from "../../types/types"
 import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
+import { v4 } from 'uuid'
 
 type contactsState = {
     contacts: TContacts,
     isLoading: boolean,
     error: string,
-    activeContactId: number,
-    activeContact: TCard,
+    activeContactId: string,
+    activeContact: TCardForFrontEnd,
     borderBottom: '' | '1px solid rgb(236,236,236)',
 }
 
@@ -16,10 +17,11 @@ const initialState: contactsState = {
     contacts: [],
     isLoading: false,
     error: '',
-    activeContactId: 0,
+    activeContactId: '',
     borderBottom: '',
     activeContact: {
-        id: 0,
+        id: '0',
+        idForFrontEnd: '',
         name: '',
         phone: '',
         email: '',
@@ -56,21 +58,21 @@ export const contactsSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
-        getActiveContactId(state, action: PayloadAction<number>) {
+        getActiveContactId(state, action: PayloadAction<string>) {
             state.activeContactId = action.payload;
         },
         getActivContactData(state) {
-            const indexContact = state.contacts.findIndex(({ id }) => id === state.activeContactId);
+            const indexContact = state.contacts.findIndex(({ idForFrontEnd }) => idForFrontEnd === state.activeContactId);
             const stateContactsIndex = state.contacts[indexContact];
-            state.activeContact.name = stateContactsIndex.name;
-            state.activeContact.email = stateContactsIndex.email;
-            state.activeContact.phone = stateContactsIndex.phone;
-            state.activeContact.note = stateContactsIndex.note;
-            state.activeContact.address.city = stateContactsIndex.address.city;
-            state.activeContact.address.street = stateContactsIndex.address.street;
-            state.activeContact.address.suite = stateContactsIndex.address.suite;
-            state.activeContact.address.zipcode = stateContactsIndex.address.zipcode;
-            state.activeContact.company.name = stateContactsIndex.company.name;
+            state.activeContact.name = stateContactsIndex?.name;
+            state.activeContact.email = stateContactsIndex?.email;
+            state.activeContact.phone = stateContactsIndex?.phone;
+            state.activeContact.note = stateContactsIndex?.note;
+            state.activeContact.address.city = stateContactsIndex?.address.city;
+            state.activeContact.address.street = stateContactsIndex?.address.street;
+            state.activeContact.address.suite = stateContactsIndex?.address.suite;
+            state.activeContact.address.zipcode = stateContactsIndex?.address.zipcode;
+            state.activeContact.company.name = stateContactsIndex?.company.name;
         },
         changeActiveContactName(state, action: PayloadAction<string>) {
             state.activeContact.name = action.payload;
@@ -100,7 +102,7 @@ export const contactsSlice = createSlice({
             state.activeContact.note = action.payload
         },
         saveActiveContactData(state) {
-            const indexContact = state.contacts.findIndex(({ id }) => id === state.activeContactId);
+            const indexContact = state.contacts.findIndex(({ idForFrontEnd }) => idForFrontEnd === state.activeContactId);
             const stateContactIndex = state.contacts[indexContact];
             stateContactIndex.name = state.activeContact.name;
             stateContactIndex.company.name = state.activeContact.company.name;
@@ -113,11 +115,9 @@ export const contactsSlice = createSlice({
             stateContactIndex.address.zipcode = state.activeContact.address.zipcode;
         },
         createNewContact(state) {
-            const maxId = state.contacts.map(item => item.id).sort((min, max) => (min - max));
-            const createNewContactID = maxId.length + 1;
-            state.activeContactId = createNewContactID;
-            const newContact = {
-                id: createNewContactID,
+            const newContact: TCardForFrontEnd = {
+                id: '',
+                idForFrontEnd: v4(),
                 name: 'Без имени',
                 company: {
                     bs: '',
@@ -134,9 +134,10 @@ export const contactsSlice = createSlice({
                     zipcode: ''
                 }
             };
+            state.activeContactId = newContact.idForFrontEnd;
             state.contacts = [...state.contacts, newContact];
         },
-        deleteContact(state, action: PayloadAction<TCard[]>) {
+        deleteContact(state, action: PayloadAction<TCardForFrontEnd[]>) {
             state.contacts = action.payload;
         },
         getBorderBottom(state, action: PayloadAction<'' | '1px solid rgb(236,236,236)'>) {
