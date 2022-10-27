@@ -135,23 +135,9 @@ export const ContactCard: FC = () => {
   },[editable, setBorderNote])
   const deleteBorderNote = useCallback((): void => {
     setBorderNote(false);
-  },[setBorderNote])
+  },[setBorderNote]);
 
-  useEffect(() => {
-    if (isActiveContact.length !== 0){
-      setDisplayUnit('flex');
-      dispatch(getBorderBottom('1px solid rgb(236,236,236)'));
-    }
-    if (isActiveContact.length === 0){
-      setDisplayUnit('none')
-    }
-  },[dispatch,
-     setDisplayUnit,
-     getBorderBottom,
-     isActiveContact,
-    ])
-
-    const handleChangeContactButton = useCallback(() => {
+  const handleChangeContactButton = useCallback(() => {
      setEditable(prev => !prev);
      if(isActiveContact.length > 0){setEditContactCard(prev => !prev)};
      if(editContactCard){dispatch(saveActiveContactData())}
@@ -160,9 +146,10 @@ export const ContactCard: FC = () => {
        dispatch,
        isActiveContact,
        editContactCard,
-       saveActiveContactData])
+       saveActiveContactData
+      ])
 
-    const handleCreateNewContact = useCallback((): void => {
+  const handleCreateNewContact = useCallback((): void => {
       dispatch(createNewContact());
       dispatch(getActivContactData());
       setEditable(false);
@@ -173,14 +160,29 @@ export const ContactCard: FC = () => {
        getActivContactData,
        setEditable,
        setEditContactCard,
-       displayModal])
+       displayModal
+      ])
 
-    const handleDeleteContact = useCallback ((): void => {
+  const handleDeleteContact = useCallback ((): void => {
       dispatch(displayModal(true));
       dispatch(changeMainScreenOpacity('0.25'));
     },[dispatch,
       displayModal,
       changeMainScreenOpacity])
+
+  useEffect(() => {
+        if (isActiveContact.length !== 0){
+          setDisplayUnit('flex');
+          dispatch(getBorderBottom('1px solid rgb(236,236,236)'));
+        }
+        if (isActiveContact.length === 0){
+          setDisplayUnit('none')
+        }
+      },[dispatch,
+         setDisplayUnit,
+         getBorderBottom,
+         isActiveContact,
+        ])
 
 
   return (

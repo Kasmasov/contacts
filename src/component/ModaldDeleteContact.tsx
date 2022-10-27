@@ -3,6 +3,7 @@ import { Button } from 'antd'
 import { modalSlice } from '../store/reducers/modalSlice'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { contactsSlice } from '../store/reducers/contactSlice'
+import { produce } from 'immer'
 
 
 export const ModalDeleteContact: FC = () => {
@@ -19,8 +20,7 @@ export const ModalDeleteContact: FC = () => {
        changeMainScreenOpacity])
 
     const handleDeleteContact = useCallback((): void =>{
-        const newContacts = contacts.filter(contact => contact.idForFrontEnd !== activeContactId);
-        console.log('contacts: ', contacts);
+        const newContacts = produce(contacts, draftState => draftState.filter(contact => contact.idForFrontEnd !== activeContactId));
         dispatch(deleteContact(newContacts));
         dispatch(displayModal(false));
         dispatch(changeMainScreenOpacity('1'));

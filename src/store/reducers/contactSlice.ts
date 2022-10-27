@@ -144,9 +144,6 @@ export const contactsSlice = createSlice({
             state.borderBottom = action.payload
         },
 
-
-
-
     }
 })
 

@@ -10,10 +10,9 @@ export const ContactList:FC = () => {
 
     const [serchingText, setSerchingText] = useState<string>('')
 
-    const {contacts} = useAppSelector (state => state.contactsSlice)
+    const {contacts, isLoading} = useAppSelector (state => state.contactsSlice)
     const selectedContactsUsingSearch = serchingText === '' ? contacts : contacts.filter(item => item.name.trim().toLowerCase().includes(serchingText));
-    const { activeModalDeleteContact } = useAppSelector(state => state.modalSlice)
-    const { mainScreenOpacity } = useAppSelector(state => state.modalSlice);
+    const { activeModalDeleteContact, mainScreenOpacity} = useAppSelector(state => state.modalSlice)
     const { getActiveContactId,
             getActivContactData,
           } = contactsSlice.actions;
@@ -77,6 +76,12 @@ export const ContactList:FC = () => {
                 textAlign:'center'
               }}
             > список пока пуст</h4>}
+            {isLoading && <h4
+          style={{
+            color:'grey',
+            textAlign: 'center'
+          }}
+          > ...идет загрузка</h4>}
 
         </div>
     </div>
