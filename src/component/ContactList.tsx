@@ -10,7 +10,7 @@ export const ContactList:FC = () => {
 
     const [serchingText, setSerchingText] = useState<string>('')
 
-    const {contacts, isLoading} = useAppSelector (state => state.contactsSlice)
+    const {contacts, isLoading, error} = useAppSelector (state => state.contactsSlice)
     const selectedContactsUsingSearch = serchingText === '' ? contacts : contacts.filter(item => item.name.trim().toLowerCase().includes(serchingText));
     const { activeModalDeleteContact, mainScreenOpacity} = useAppSelector(state => state.modalSlice)
     const { getActiveContactId,
@@ -43,7 +43,7 @@ export const ContactList:FC = () => {
       }}
     >
         <Input 
-          placeholder="input search text" 
+          placeholder="введите текст для поиска" 
           onChange={(({target}) => handleChangeSerching(target.value))}
           style={{ 
             margin: '2rem 1rem 0rem 1rem',
@@ -82,6 +82,12 @@ export const ContactList:FC = () => {
             textAlign: 'center'
           }}
           > ...идет загрузка</h4>}
+          {error && <h4
+          style={{
+            color: 'grey',
+            textAlign:'center'
+          }}
+          >{error}</h4>}
 
         </div>
     </div>

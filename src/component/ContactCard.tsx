@@ -21,7 +21,8 @@ export const ContactCard: FC = () => {
     saveActiveContactData,
     getActivContactData,
     createNewContact,
-    getBorderBottom
+    getBorderBottom,
+    deleteErrorMessage
   } = contactsSlice.actions;
   const { displayModal } = modalSlice.actions;
   const { activeModalDeleteContact, mainScreenOpacity } = useAppSelector(state => state.modalSlice);
@@ -154,13 +155,15 @@ export const ContactCard: FC = () => {
       dispatch(getActivContactData());
       setEditable(false);
       setEditContactCard(true);
-      dispatch(displayModal(false))
+      dispatch(displayModal(false));
+      dispatch(deleteErrorMessage())
     },[dispatch,
        createNewContact,
        getActivContactData,
        setEditable,
        setEditContactCard,
-       displayModal
+       displayModal,
+       deleteErrorMessage
       ])
 
   const handleDeleteContact = useCallback ((): void => {

@@ -54,6 +54,9 @@ export const contactsSlice = createSlice({
             state.contacts = action.payload;
 
         },
+        deleteErrorMessage(state) {
+            state.error = ''
+        },
         contactsFetchingError(state, action: PayloadAction<string>) {
             state.isLoading = false;
             state.error = action.payload;
