@@ -15,7 +15,7 @@ const LoginPage: FC = () => {
     
   return (
     <div
-    className="login-page"
+    className="modal-login-page"
     >
         <h3
         style={{
@@ -33,9 +33,9 @@ const LoginPage: FC = () => {
       autoComplete="off"
     >
       <Form.Item
-        label="Имя"
-        name="username"
-        rules={[{ required: true, message: 'Пожалуйста, заполните имя!' }]}
+        label="E-mail"
+        name="email"
+        rules={[{ required: true, message: 'Пожалуйста, заполните E-mail!' }]}
       >
         <Input />
       </Form.Item>
@@ -50,11 +50,11 @@ const LoginPage: FC = () => {
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">
-          Готово
+          Войти
         </Button>
       </Form.Item>
 
-      <span> У меня нет учетной записи, хочу <Link to='registerPage'>зарегистрироваться</Link></span>
+      <span> У меня нет учетной записи, хочу <Link to='/registerPage'>зарегистрироваться</Link></span>
 
     </Form>
     </div>
