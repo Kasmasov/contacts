@@ -2,7 +2,7 @@ import React, { FC, useCallback, useState } from 'react';
 import { Input } from 'antd'
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { contactsSlice } from '../store/reducers/contactSlice';
-import './ContactForm.css'
+import '../component/pages/ContactFormPage.css'
 import { modalSlice } from '../store/reducers/modalSlice';
 
 

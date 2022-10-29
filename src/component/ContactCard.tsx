@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Button, Input } from 'antd'
-import './ContactForm.css'
+import '../component/pages/ContactFormPage.css'
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { contactsSlice } from '../store/reducers/contactSlice';
 import { modalSlice } from '../store/reducers/modalSlice';
