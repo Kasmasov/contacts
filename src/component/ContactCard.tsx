@@ -1,9 +1,9 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Button, Input } from 'antd'
-import '../component/pages/ContactFormPage.css'
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { contactsSlice } from '../store/reducers/contactSlice';
 import { modalSlice } from '../store/reducers/modalSlice';
+import '../component/pages/ContactFormPage.css'
 
 export const ContactCard: FC = () => {
 

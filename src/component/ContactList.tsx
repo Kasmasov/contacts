@@ -2,8 +2,8 @@ import React, { FC, useCallback, useState } from 'react';
 import { Input } from 'antd'
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { contactsSlice } from '../store/reducers/contactSlice';
-import '../component/pages/ContactFormPage.css'
 import { modalSlice } from '../store/reducers/modalSlice';
+import '../component/pages/ContactFormPage.css'
 
 
 export const ContactList:FC = () => {

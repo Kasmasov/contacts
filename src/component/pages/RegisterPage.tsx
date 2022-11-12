@@ -4,13 +4,13 @@ import { Input, Form, Button } from 'antd'
 import './LoginPage.css'
 
 const RegisterPage: FC = () => {
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
-      };
+    // const onFinish = (values: any) => {
+    //     console.log('Success:', values);
+    //   };
     
-      const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-      };
+    //   const onFinishFailed = (errorInfo: any) => {
+    //     console.log('Failed:', errorInfo);
+    //   };
     
   return (
     <div
@@ -27,8 +27,8 @@ const RegisterPage: FC = () => {
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      // onFinish={onFinish}
+      // onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Form.Item
@@ -36,7 +36,10 @@ const RegisterPage: FC = () => {
         name="email"
         rules={[{ required: true, message: 'Пожалуйста, заполните E-mail!' }]}
       >
-        <Input />
+        <Input 
+        style={{
+          width: '255px',
+        }}/>
       </Form.Item>
 
       <Form.Item
@@ -44,7 +47,10 @@ const RegisterPage: FC = () => {
         name="password"
         rules={[{ required: true, message: 'Пожалуйста, заполните пароль!' }]}
       >
-        <Input.Password />
+        <Input.Password
+        style={{
+          width: '255px',
+        }} />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
