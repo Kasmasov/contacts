@@ -38,3 +38,7 @@ export type TContacts = TCardForFrontEnd[];
 export type TItemList = keyof TCardFromBackEnd;
 
 export type TList = TItemList[];
+
+export type TLoginAndRegistrationProps = {
+    handleClickForRegistrationAndLogin: (email: string, password: string) => void;
+}; 

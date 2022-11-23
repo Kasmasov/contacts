@@ -5,6 +5,7 @@ import { ContactForm } from './component/pages/ContactFormPage'
 import LoginPage from './component/pages/LoginPage';
 import RegisterPage from './component/pages/RegisterPage';
 import { setupStore } from './store/store'
+import './utils/firebase'
 
 function App() {
   const store = setupStore();
