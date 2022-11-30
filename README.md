@@ -1,3 +1,16 @@
+Тестовое задание на вакансию Front-end Developer
+
+Приложение личный кабинет.
+В приложении три страницы:
+	•	Страница входа
+    •	Страница регистрации
+	•	Страница со списком контактов
+
+Для использования приложения необходимо зарегистрироваться или войти под 
+E-mail: Sincere@april.biz, password: 123456Sincere
+
+Верси node v18.4.0
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
