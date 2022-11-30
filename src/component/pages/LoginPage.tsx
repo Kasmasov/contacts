@@ -16,7 +16,7 @@ const LoginPage: FC = () => {
     signInWithEmailAndPassword (auth, email, password)
       .then(({user}) => {
           dispatch(setUser({
-            email: user.email,
+            userEmail: user.email,
             id: user.uid,
             token: user.refreshToken,
           }));

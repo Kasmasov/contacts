@@ -3,6 +3,7 @@ import { Button, Input } from 'antd'
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { contactsSlice } from '../store/reducers/contactSlice';
 import { modalSlice } from '../store/reducers/modalSlice';
+import { removeUser } from '../store/reducers/userSlice';
 import '../component/pages/ContactFormPage.css'
 
 export const ContactCard: FC = () => {
@@ -417,13 +418,25 @@ export const ContactCard: FC = () => {
           -
         </Button>
         </div>
-       <Button 
-         size='small'
-         onClick={handleChangeContactButton}
-         disabled={activeModalDeleteContact || isActiveContact.length === 0 ? true : false} 
+        <div>
+         <Button 
+           type='primary'
+           size='small'
+           style={{
+            marginRight:'10px'
+           }}
+           onClick={() => dispatch(removeUser())}
          >
-         {editContactCard ? 'Готово':'Изменить'}
-        </Button>
+           Выйти
+         </Button>
+         <Button 
+           size='small'
+           onClick={handleChangeContactButton}
+           disabled={activeModalDeleteContact || isActiveContact.length === 0 ? true : false} 
+         >
+           {editContactCard ? 'Готово':'Изменить'}
+         </Button>
+        </div>
        </div>
     </div>
   )

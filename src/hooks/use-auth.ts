@@ -1,12 +1,12 @@
 import { useAppSelector } from "./redux";
 
 export function useAuth() {
-    const { id, token, email } = useAppSelector(state => state.userReducer);
+    const { id, token, userEmail } = useAppSelector(state => state.userReducer);
 
     return {
-        isAyth: !!email,
+        isAuth: !!userEmail,
         id,
-        email,
+        userEmail,
         token
     }
 }

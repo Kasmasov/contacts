@@ -15,7 +15,7 @@ const RegisterPage: FC = () => {
     createUserWithEmailAndPassword (auth, email, password)
       .then(({user}) => {
         dispatch(setUser({
-            email: user.email,
+            userEmail: user.email,
             id: user.uid,
             token: user.refreshToken,
         }));
