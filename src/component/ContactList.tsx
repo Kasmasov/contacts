@@ -61,11 +61,11 @@ export const ContactList:FC = () => {
               // .sort((contactA, contactB)=> contactA.name > contactB.name ? 1 : -1)
               .map(item => 
               <h5 
-                key={item.idForFrontEnd}
+                key={item.idForFrontend}
                 style={{
                   cursor:'pointer'
                 }}
-                onClick={()=>{handleGetContactID(item.idForFrontEnd)}}
+                onClick={()=>{handleGetContactID(item.idForFrontend)}}
               >
                 {`${item.name}`}
               </h5>)

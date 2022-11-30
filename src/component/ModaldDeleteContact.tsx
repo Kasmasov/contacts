@@ -20,7 +20,7 @@ export const ModalDeleteContact: FC = () => {
        changeMainScreenOpacity])
 
     const handleDeleteContact = useCallback((): void =>{
-        const newContacts = produce(contacts, draftState => draftState.filter(contact => contact.idForFrontEnd !== activeContactId));
+        const newContacts = produce(contacts, draftState => draftState.filter(contact => contact.idForFrontend !== activeContactId));
         dispatch(deleteContact(newContacts));
         dispatch(displayModal(false));
         dispatch(changeMainScreenOpacity('1'));
@@ -46,7 +46,7 @@ export const ModalDeleteContact: FC = () => {
             style={{
                 marginBottom:'20px'
             }}
-            >{contacts.filter(({idForFrontEnd}) => idForFrontEnd === activeContactId)[0]?.name}</h2>
+            >{contacts.filter(({idForFrontend}) => idForFrontend === activeContactId)[0]?.name}</h2>
            <div> <Button
             size='small'
             onClick={handleCancelDelete}

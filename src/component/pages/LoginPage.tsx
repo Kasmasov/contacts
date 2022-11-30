@@ -7,13 +7,15 @@ import { setUser } from '../../store/reducers/userSlice'
 import './LoginPage.css'
 
 const LoginPage: FC = () => {
+  
+  const dispatch = useAppDispatch();
+
   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
     signInWithEmailAndPassword (auth, email, password)
       .then(console.log)
       .catch(console.error)
   };
-  const dispatch = useAppDispatch();
 
   return (
     <div

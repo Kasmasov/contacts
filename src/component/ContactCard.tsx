@@ -8,7 +8,7 @@ import '../component/pages/ContactFormPage.css'
 export const ContactCard: FC = () => {
 
   const { activeContactId, contacts } = useAppSelector(state => state.contactsSlice)
-  const isActiveContact = contacts.filter(contact => contact.idForFrontEnd === activeContactId);
+  const isActiveContact = contacts.filter(contact => contact.idForFrontend === activeContactId);
   const {changeActiveContactName, 
     changeActiveContactCompanyName,
     changeActiveContactPhone,

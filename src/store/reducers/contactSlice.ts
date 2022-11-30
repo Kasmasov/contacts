@@ -21,7 +21,7 @@ const initialState: contactsState = {
     borderBottom: '',
     activeContact: {
         id: '0',
-        idForFrontEnd: '',
+        idForFrontend: '',
         name: '',
         phone: '',
         email: '',
@@ -65,7 +65,7 @@ export const contactsSlice = createSlice({
             state.activeContactId = action.payload;
         },
         getActivContactData(state) {
-            const indexContact = state.contacts.findIndex(({ idForFrontEnd }) => idForFrontEnd === state.activeContactId);
+            const indexContact = state.contacts.findIndex(({ idForFrontend }) => idForFrontend === state.activeContactId);
             const stateContactsIndex = state.contacts[indexContact];
             state.activeContact.name = stateContactsIndex?.name;
             state.activeContact.email = stateContactsIndex?.email;
@@ -105,7 +105,7 @@ export const contactsSlice = createSlice({
             state.activeContact.note = action.payload
         },
         saveActiveContactData(state) {
-            const indexContact = state.contacts.findIndex(({ idForFrontEnd }) => idForFrontEnd === state.activeContactId);
+            const indexContact = state.contacts.findIndex(({ idForFrontend }) => idForFrontend === state.activeContactId);
             const stateContactIndex = state.contacts[indexContact];
             stateContactIndex.name = state.activeContact.name;
             stateContactIndex.company.name = state.activeContact.company.name;
@@ -120,7 +120,7 @@ export const contactsSlice = createSlice({
         createNewContact(state) {
             const newContact: TCardForFrontEnd = {
                 id: '',
-                idForFrontEnd: v4(),
+                idForFrontend: v4(),
                 name: 'Без имени',
                 company: {
                     bs: '',
@@ -137,7 +137,7 @@ export const contactsSlice = createSlice({
                     zipcode: ''
                 }
             };
-            state.activeContactId = newContact.idForFrontEnd;
+            state.activeContactId = newContact.idForFrontend;
             state.contacts = [...state.contacts, newContact];
         },
         deleteContact(state, action: PayloadAction<TCardForFrontEnd[]>) {

@@ -1,10 +1,10 @@
-import { TCardForFrontEnd, TCardFromBackEnd } from './../types/types';
+import { TCardForFrontEnd, TCardFromBackend } from './../types/types';
 import { v4 } from 'uuid'
-export const addIDForFrontEndToContacts = (contacts: TCardFromBackEnd): TCardForFrontEnd => {
+export const addidForFrontendToContacts = (contacts: TCardFromBackend): TCardForFrontEnd => {
 
     const contactsForFrontEnd = {
         id: contacts.id,
-        idForFrontEnd: v4(),
+        idForFrontend: v4(),
         name: contacts.name,
         phone: contacts.phone,
         email: contacts.email,

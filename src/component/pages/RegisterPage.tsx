@@ -1,21 +1,28 @@
 import React, { FC } from 'react'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
 import { setUser } from '../../store/reducers/userSlice';
 import {FormForLoginAndRegistration} from '../FormForLoginAndRegistration'
 import './LoginPage.css'
-import { stringLength } from '@firebase/util';
 
 const RegisterPage: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleRegister = (email: string, password: string) => {
     const auth = getAuth();
     createUserWithEmailAndPassword (auth, email, password)
-      .then(console.log)
+      .then(({user}) => {
+        dispatch(setUser({
+            email: user.email,
+            id: user.uid,
+            token: user.refreshToken,
+        }));
+        navigate('/contactFormPage');
+      })
       .catch(console.error)
   };
-  const dispatch = useAppDispatch()
    
   return (
     <div
