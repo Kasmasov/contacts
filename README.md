@@ -1,59 +1,40 @@
 Тестовое задание на вакансию Front-end Developer
 
 Приложение личный кабинет.
-В приложении три страницы:
-	•	Страница входа
-    •	Страница регистрации
-	•	Страница со списком контактов
+В приложении две страницы:
+•	Страница входа
+•	Страница со списком контактов
 
-Для использования приложения необходимо зарегистрироваться или войти под 
-E-mail: Sincere@april.biz, password: 123456Sincere
+Оформление и данные для заполнения страниц на усмотрение кандидата.
+Обязательно наличие информации в readme о том, как запускать приложение. Так же необходимо указать версию node (узнать можно с помощью команды node -v)
+Для выполнения тестового задания Вы можете использовать UI-библиотеку компонентов (MUI, antd и т.д.).
+Задание необходимо выполнить на TypeScript, без использования any и ts-ignore.
+При выполнении работы обязательно использовать стейт менеджер (redux, mobx)
+
+Страница входа
+Для реализации авторизации можно использовать запросы с моковыми данными https://github.com/typicode/json-server.
+
+Страница со списком контактов
+Страница со списком контактов пользователя должна быть доступна только после авторизации.
+
+На странице со списком контактов должна быть возможность добавлять/удалять/редактировать контакты, а также желательно наличие функции поиска.
+
+
+Для использования приложения необходимо:
+1) скопировать приложение в папку contacts;
+2) в папке проекта cd contacts установить зависимости npm install;
+3) собрать проект: npm run build
+4) в файл .env.local пропишите свои ключи, или пропишите мои тестовые:
+
+REACT_APP_FIREBASE_API_KEY = AIzaSyAIccPVj9FN8L39UK0aW7drT86EShwOH-w
+REACT_APP_FIREBASE_AUTH_DOMAIN = auth-contacts-app.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID = auth-contacts-app
+REACT_APP_FIREBASE_STORAGE_BUCKET = auth-contacts-app.appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID = 960039423522
+REACT_APP_FIREBASE_APP_ID = 1:960039423522:web:dca86b14efd582af6a047b
+
+5) запустить проект npm start
+6) открыть в браузере localhost:3000
+7) зарегистрироваться или войти в приложение под E-mail: Sincere@april.biz, password: 123456Sincere
 
 Верси node v18.4.0
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
