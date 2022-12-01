@@ -21,17 +21,18 @@
 
 
 Для использования приложения необходимо:
-1) скопировать приложение в папку contacts;
-2) в папке проекта cd contacts установить зависимости npm install;
+1) скопировать репозиторий;
+2) перейти в папку проекта
+3) установить зависимости npm install;
 3) собрать проект: npm run build
 4) в файл .env.local пропишите свои ключи, или пропишите мои тестовые:
 
-REACT_APP_FIREBASE_API_KEY = AIzaSyAIccPVj9FN8L39UK0aW7drT86EShwOH-w
-REACT_APP_FIREBASE_AUTH_DOMAIN = auth-contacts-app.firebaseapp.com
-REACT_APP_FIREBASE_PROJECT_ID = auth-contacts-app
-REACT_APP_FIREBASE_STORAGE_BUCKET = auth-contacts-app.appspot.com
-REACT_APP_FIREBASE_MESSAGING_SENDER_ID = 960039423522
-REACT_APP_FIREBASE_APP_ID = 1:960039423522:web:dca86b14efd582af6a047b
+REACT_APP_FIREBASE_API_KEY = AIzaSyAIccPVj9FN8L39UK0aW7drT86EShwOH-w  
+REACT_APP_FIREBASE_AUTH_DOMAIN = auth-contacts-app.firebaseapp.com  
+REACT_APP_FIREBASE_PROJECT_ID = auth-contacts-app  
+REACT_APP_FIREBASE_STORAGE_BUCKET = auth-contacts-app.appspot.com  
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID = 960039423522  
+REACT_APP_FIREBASE_APP_ID = 1:960039423522:web:dca86b14efd582af6a047b  
 
 5) запустить проект npm start
 6) открыть в браузере localhost:3000
